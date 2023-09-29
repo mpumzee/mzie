@@ -1,0 +1,4 @@
+1. Form validation
+2. Display errorMessages
+3. disable submit button if invalid fields
+4. Error handling

@@ -1,0 +1,104 @@
+<div class="content-wrapper" style="padding: 20px 20px 20px 15px">
+  
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Owner Management</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form [formGroup] = "ownerForm" (submit)="saveOwner()">
+                <div class="card-body row">
+                  <div class="form-group col-sm-3">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" formControlName="fullName" id="fullName" class="form-control" />
+                  
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label for="nationalIdNumber">National ID</label>
+                    <input type="text" formControlName="nationalIdNumber" id="nationalIdNumber" class="form-control" />                  
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="text" formControlName="mobileNumber" class="form-control" id="mobileNumber" />
+                  </div>                  
+  
+                  <div class="col-sm-3" style="margin-top: 5.5vh;">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+                <div class="card-body row" style="margin-top: -10px!important;">
+                    <div class="form-group col-sm-3">
+                        <label for="address">Physical Address</label>
+                        <textarea formControlName="address" cols="90"> </textarea>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+  
+      
+    </section>
+  
+    <!-- Table starts -->
+    <section class="content">
+      <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Stands List</h3>
+  
+            <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+  
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body table-responsive p-0" style="height: 300px;">
+            <table class="table table-head-fixed text-nowrap">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Full Name</th>
+                  <th>Nation ID Number</th>
+                  <th>Mobile Phone</th>
+                  <th>Physical Address</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let owner of owners; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{ owner["fullName"] }}</td>
+                  <td>{{ owner["nationalIdNumber"] }}</td>
+                  <td>{{ owner["mobileNumber"] }}</td>
+                  <td>{{ owner["address"] }}</td>
+                  <td><i class="fa fa-trash ml-3 text-danger" style="cursor: pointer;" (click)="deleteOwner(owner['id'])"></i></td>
+                </tr>          
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+      </div></section>
+  </div>
+  

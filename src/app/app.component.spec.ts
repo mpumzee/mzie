@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'mzie'`, () => {
+  it(`should have as title 'empower-2.0'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('mzie');
+    expect(app.title).toEqual('empower-2.0');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('mzie app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('empower-2.0 app is running!');
   });
 });
