@@ -1,63 +1,142 @@
 <div class="content-wrapper" style="padding: 20px 20px 20px 15px">
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Payments</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Payments</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <!-- /.container-fluid -->
-  </section>
-
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
-          <!-- general form elements -->
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">Payment</h3>
+        <div class="col-md-7 mb-2">
+          <form action="simple-results.html">
+            <div class="input-group">
+              <input
+                type="search"
+                class="form-control form-control-lg rounded-0"
+                placeholder="Product name"
+              />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-lg btn-default rounded-0">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <form>
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Stand number</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">E10/42</option>
-                    <option>E10/43</option>
-                    <option>E11/42</option>
-                    <option>E10/44</option>
-                    <option>E09/45</option>                    
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Amount</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="Amount"                    
-                  />
-                </div>
-                
-                
-              </div>
-              <!-- /.card-body -->
+          </form>
+        </div>
 
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="col-md-7">
+          <!-- general form elements -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card shadow-none">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0 border">
+                  <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let payment of payments; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ payment["name"] }}</td>
+                        <td>{{ payment["sellingPrice"] }}</td>
+                        <td class="w-50">
+                          <button
+                            (click)="subtract(payment)"
+                            class="bs-stepper-circle bg-primary border-0"
+                            id="subtract"
+                            style="
+                              height: 1.5em;
+                              width: 1.5em;
+                              padding-top: 0.2em;
+                              cursor: pointer;
+                            "
+                          >
+                            -
+                          </button>
+                          <input
+                            [ngModel]="payment['quantity']"
+                            type="number"
+                            min="0"
+                            name="payment['id']"
+                            id="payment['id']"
+                            class="form-control-sm w-25"
+                            style="border: 1px grey solid"
+                          />
+                          <button
+                            (click)="add(payment)"
+                            class="bs-stepper-circle border-0"
+                            id="add"
+                            style="
+                              height: 1.5em;
+                              width: 1.5em;
+                              padding-top: 0.3em;
+                              cursor: pointer;
+                            "
+                          >
+                            +
+                          </button>
+                        </td>
+                        <td>
+                          {{ payment["quantity"] * payment["sellingPrice"] }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
               </div>
-            </form>
+              <!-- /.card -->
+            </div>
           </div>
-          <!-- /.card -->
+        </div>
+        <!-- /.card -->
+
+        <div class="col-md-5">
+          <div class="info-box bg-gradient-info rounded-0">
+            <div class="info-box-content">
+              <span class="text-center">TOTAL COST</span>
+              <span class="text-center" style="font-size: x-large"
+                >${{ totalCost }}</span
+              >
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+          <div class="mb-3">
+            <input
+            title="amountReceived"
+              [ngModel]="amountReceived"
+              (keydown.enter)="onKeypressEvent($event)"
+              type="number"
+              min="0"
+              value=""
+              class="form-control"
+              style="
+                font-size: xx-large;
+                height: 60px;
+                border: thick rgb(118, 118, 176) solid;
+              "
+            />
+          </div>
+
+          <div class="row">
+
+              <button class="ml-2 btn btn-lg btn-primary info-box bg-gradient-primary col-4 text-center" (click)="calculateChange()">
+                Enter
+                <!-- <i class="fa-solid fa-circle-plus text-white"></i> -->
+              </button>
+
+            <div class="info-box bg-gradient-success ml-2 col rounded-0">
+              <div class="info-box-content">
+                <span class="text-center">CHANGE</span>
+                <span class="text-center" style="font-size: x-large"
+                  >${{change}}</span>
+              </div>
+            </div>            
+          </div>
+
           
         </div>
       </div>

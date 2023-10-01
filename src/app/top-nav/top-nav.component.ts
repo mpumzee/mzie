@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'top-nav',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-nav.component.css']
 })
 export class TopNavComponent {
-
+constructor(public router: Router){
+  console.log(this.router.getCurrentNavigation());
+}
 }

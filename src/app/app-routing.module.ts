@@ -6,7 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { UserComponent } from './user/user.component';
 import { PaymentComponent } from './payment/payment.component';
-import { StandComponent } from './stand/stand.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import { OwnerComponent } from './owner/owner.component';
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
       {path: 'user', component: UserComponent},
       // {path: 'account', component: AccountComponent},
       // {path: 'payment', component: PaymentComponent},
-      {path: 'stand', component: StandComponent},
+      {path: 'inventory', component: InventoryComponent},
       {path: 'owner', component: OwnerComponent},
       {path: 'payment', component: PaymentComponent},
       // {path: 'statement', component: StatementComponent},

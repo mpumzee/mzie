@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StandComponent } from './stand.component';
+import { InventoryComponent } from './inventory.component';
 
-describe('StandComponent', () => {
-  let component: StandComponent;
-  let fixture: ComponentFixture<StandComponent>;
+describe('InventoryComponent', () => {
+  let component: InventoryComponent;
+  let fixture: ComponentFixture<InventoryComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StandComponent]
+      declarations: [InventoryComponent]
     });
-    fixture = TestBed.createComponent(StandComponent);
+    fixture = TestBed.createComponent(InventoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
