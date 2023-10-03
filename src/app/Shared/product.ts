@@ -1,7 +1,8 @@
 export interface Product {
   id: number;
-  name: string;
+  itemName: string;
   orderPrice: number;
   sellingPrice: number;
-  expiryDate: string;     
+  expiryDate: string;
+  quantity: number;     
 }

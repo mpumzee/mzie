@@ -16,8 +16,8 @@
                   <label for="ProductName">Product Name</label>
                   <input
                     type="text"
-                    formControlName="ProductName"
-                    id="ProductName"
+                    formControlName="itemName"
+                    id="itemName"
                     class="form-control"
                   />
                   <div class="text-danger" *ngIf="standNumberError">Product Name is required</div>
@@ -43,6 +43,17 @@
                   <div class="text-danger ml-3" *ngIf="standTypeError">Select Stand Type</div>
                 </div>
 
+                <div class="form-group col-sm-1">
+                  <label for="expiryDate">Quantity</label> 
+                    <input
+                      type="number"
+                      formControlName="quantity"
+                      class="form-control"
+                      id="quantity"
+                    />                  
+                  <div class="text-danger ml-3" *ngIf="standTypeError">Select Stand Type</div>
+                </div>
+                
                 <div class="form-group col-sm-2">
                   <label for="expiryDate">Expiry Date</label> 
                     <input
@@ -54,7 +65,9 @@
                   <div class="text-danger ml-3" *ngIf="standTypeError">Select Stand Type</div>
                 </div>
 
-                <div class="col-sm-3" style="margin-top: 5.5vh">
+                
+
+                <div class="col-sm-2" style="margin-top: 5.5vh">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </div>
@@ -116,7 +129,7 @@
               </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 300px">
+            <div class="card-body table-responsive p-0" style="">
               <table class="table table-head-fixed text-nowrap">
                 <thead>
                   <tr>
@@ -124,6 +137,7 @@
                     <th>Product Name</th>
                     <th>Order Price</th>
                     <th>Selling Price</th>
+                    <th>Quantity</th>
                     <th>Expiry Date</th>
                     <th>Delete</th>
                   </tr>
@@ -131,9 +145,10 @@
                 <tbody>
                   <tr *ngFor="let product of products; let i = index">
                     <td>{{ i + 1 }}</td>
-                    <td>{{ product["name"] }}</td>
+                    <td>{{ product["itemName"] }}</td>
                     <td>{{ product["orderPrice"] | currency }}</td>
                     <td>{{ product["sellingPrice"] | currency }}</td>
+                    <td>{{ product["quantity"] }}</td>
                     <td>{{ product["expiryDate"] }}</td>
                     <td>
                       <i

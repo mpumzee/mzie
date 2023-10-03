@@ -9,6 +9,7 @@ import { Product } from '../Shared/product';
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
+
 export class InventoryComponent {
   public stockForm: FormGroup;
   errorMessage = "";
@@ -24,6 +25,7 @@ export class InventoryComponent {
       orderPrice : new FormControl(0,Validators.required), //force user to type value
       sellingPrice: new FormControl(0,Validators.required),
       expiryDate: new FormControl(0,Validators.required),
+      quantity: new FormControl(0,Validators.required),
     })
   }
 
@@ -39,23 +41,22 @@ standTypeValidator(control: FormControl) {
 
 saveProduct(){
   let data = this.stockForm.value;
+  this.products.push(data)
+  localStorage.setItem("products", JSON.stringify(this.products));
+
+  console.log(data);
+  
   // let productCollection = collection(this.fs, 'products');
   // return addDoc(productCollection, data);
 }
 
 getAllIProducts(){
-  const url = "https://localhost:7261/api/stand";
-  // this.http.get(url).subscribe(data =>{
-  //   this.stands = data;    
-  // })
+  let x= localStorage.getItem("products") || "";
+  this.products = JSON.parse(x);
 }
 
 deleteProduct(id: number){
-  const url = "https://localhost:7261/api/stand/" + id;
-  this.http.delete(url).subscribe(data =>{
-    console.log(data);
-    this.getAllIProducts();
-  })
+  // this.products.splice();
 }
 
 }

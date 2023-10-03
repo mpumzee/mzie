@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Payment } from '../Shared/payment';
+import { Product } from '../Shared/product';
 
 
 @Component({
@@ -8,57 +9,35 @@ import { Payment } from '../Shared/payment';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent {
-payments: Payment[] = [
-  {
-    "id": 1,
-    "name": "Payment 1",
-    "sellingPrice": 10.0,
-    "quantity": 0,
-    "total": 0,
-    "transactionDate": "2023-11-01"
-  },
-  {
-    "id": 2,
-    "name": "Payment 2",
-    "sellingPrice": 20.0,
-    "quantity": 0,
-    "total": 0,
-    "transactionDate": "2024-02-01"
-  },
-  {
-    "id": 3,
-    "name": "Payment 3",
-    "sellingPrice": 30.0,
-    "quantity": 0,
-    "total": 0,
-    "transactionDate": "2024-05-01"
-  },
-  {
-    "id": 4,
-    "name": "Payment 4",
-    "sellingPrice": 40.0,
-    "quantity": 0,
-    "total": 0,
-    "transactionDate": "2024-08-01"
-  },
-  {
-    "id": 5,
-    "name": "Payment 5",
-    "sellingPrice": 50.0,
-    "quantity": 0,
-    "total": 0,
-    "transactionDate": "2024-11-01"
-  }
-]
-;
+payments: Payment[] = [];
+products: Product[] = [];
 
 totalCost = 0;
   change = 0;
   amountReceived = 0;
 
-constructor(){}
+constructor(){
+  this.getAllProducts();
+  this.products.forEach(product => {
+    let x = {} as Payment;
+    x.id = product.id;
+    x.name = product.itemName;
+    x.sellingPrice = product.sellingPrice;
+    x.quantity = 0;
+    x.total = 0;
+    x.transactionDate = Date.now().toString();
+    this.payments.push(x);  
+  });  
+}
+
+getAllProducts(){
+  let x = localStorage.getItem("products") || "";
+  this.products = JSON.parse(x);
+}
 
 add(payment:Payment){
+  console.log(payment);
+  
   payment.quantity = payment.quantity + 1;
   payment.total = payment.sellingPrice * payment.quantity;
   this.total();
@@ -80,7 +59,17 @@ total(){
 }
 
 calculateChange(){
-  this.change = this.totalCost - this.amountReceived;
+  this.change = this.amountReceived - this.totalCost;
+  console.log(this.payments);
+  for (let i = 0; i < this.payments.length; i++) {
+    if(this.payments[i].name == this.products[i].itemName){
+      let x = this.products[i].quantity;
+      x = x - this.payments[i].quantity; //reduce stock
+      this.products[i].quantity = x;
+    }
+  }
+  // localStorage.setItem("")
+  
 }
 
 onKeypressEvent(event:any){
