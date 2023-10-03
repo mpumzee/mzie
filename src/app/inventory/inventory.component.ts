@@ -16,6 +16,7 @@ export class InventoryComponent {
   products: Product[] = [];
   standTypeError = false;
   standNumberError = false;
+  editEnabled = false
 
 
   constructor(private http: HttpClient){
@@ -40,23 +41,49 @@ standTypeValidator(control: FormControl) {
 }
 
 saveProduct(){
-  let data = this.stockForm.value;
-  this.products.push(data)
-  localStorage.setItem("products", JSON.stringify(this.products));
+  let product = this.stockForm.value as Product;
+  for(let i = 0; i < this.products.length; i++){
+    if(this.products[i].itemName == product.itemName){
+      this.products[i] = product;
+      localStorage.setItem("products", JSON.stringify(this.products));
+      break;
+    }
+    else{
+      this.products.push(product);
+      localStorage.setItem("products", JSON.stringify(this.products));
+      break;
+    }
+  }
+  
 
-  console.log(data);
+  console.log(product);
   
   // let productCollection = collection(this.fs, 'products');
   // return addDoc(productCollection, data);
 }
 
 getAllIProducts(){
-  let x= localStorage.getItem("products") || "";
+  let x = localStorage.getItem("products") || "";
   this.products = JSON.parse(x);
 }
 
+selectProduct(product: Product){
+  this.stockForm.setValue(product);
+}
+
+saveEditedProduct(product: Product){
+  let x = {} as Product;
+  for(let i = 0; i < this.products.length; i++){
+    if(this.products[i].itemName == product.itemName){
+      this.products[i] = product;
+    }
+  }
+
+  localStorage.setItem("products", JSON.stringify(this.products));
+}
 deleteProduct(id: number){
   // this.products.splice();
 }
+
 
 }
