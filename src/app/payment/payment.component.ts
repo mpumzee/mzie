@@ -15,8 +15,9 @@ productExpired = false;
 productOutofStock = false;
 
 totalCost = 0;
-  change = 0;
-  amountReceived = 0;
+change = 0;
+amountReceived = 0;
+searchText = ""
 
 constructor(){
   
@@ -82,6 +83,10 @@ onKeypressEvent(event:any){
 }
 
 
-
+search(value: string): void {
+  this.payments = this.payments.filter((val) =>
+    val.name.toLowerCase().includes(value)
+  );
+}
 
 }

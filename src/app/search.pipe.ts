@@ -15,7 +15,7 @@ export class SearchFilterPipe implements PipeTransform {
     console.log(JSON.stringify(items));
     
     let filteredItems = items.filter( it => {
-      return (it.standNumber  || '').toLowerCase().includes(searchText);
+      return (it.itemName  || '').toLowerCase().includes(searchText);
     });
     filterMetadata.count = filteredItems.length;
     return filteredItems;

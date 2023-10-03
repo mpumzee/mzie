@@ -27,6 +27,7 @@ export class LoginComponent {
     this.errorMessage = false;
     let username =  this.loginData.controls['username'].value;
     let password =  this.loginData.controls['password'].value;
+    
     if(username = "1" && password == "1"){
       this.router.navigate(['menu/dashboard']);
     }

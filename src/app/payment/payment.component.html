@@ -6,9 +6,13 @@
           <form action="simple-results.html">
             <div class="input-group">
               <input
+              [(ngModel)] = "searchText"
                 type="search"
                 class="form-control form-control-lg rounded-0"
                 placeholder="Product name"
+                [ngModelOptions]=" 
+             {standalone: true}"
+                (input)="search(searchText)" 
               />
               <div class="input-group-append">
                 <button type="submit" class="btn btn-lg btn-default rounded-0">
@@ -37,7 +41,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let payment of payments; let i = index">
+                      <tr *ngFor="let payment of payments; let i = index; searchFilter: searchText;">
                         <td>{{ i + 1 }}</td>
                         <td>{{ payment["name"] }}</td>
                         <td>{{ payment["sellingPrice"] }}</td>

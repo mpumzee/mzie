@@ -13,16 +13,10 @@ import { PaymentComponent } from './payment/payment.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OwnerComponent } from './owner/owner.component';
 import { AccountComponent } from './account/account.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCRmn4biOdDGQvbBkZgZRheSQr_pMDQpsg",
-  authDomain: "mzie-c8c50.firebaseapp.com",
-  projectId: "mzie-c8c50",
-  storageBucket: "mzie-c8c50.appspot.com",
-  messagingSenderId: "176471133849",
-  appId: "1:176471133849:web:20ccf27e990e0a40dff208"
-};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +29,7 @@ const firebaseConfig = {
     InventoryComponent,
     OwnerComponent,
     AccountComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +37,6 @@ const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
