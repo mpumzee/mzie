@@ -19,6 +19,11 @@ totalCost = 0;
   amountReceived = 0;
 
 constructor(){
+  
+  
+}
+
+ngOnInit(){
   this.getAllProducts();
   this.products.forEach(product => {
     let x = {} as Payment;

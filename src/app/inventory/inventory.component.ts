@@ -20,7 +20,7 @@ export class InventoryComponent {
 
 
   constructor(private http: HttpClient){
-    this.getAllIProducts();
+   
     this.stockForm = new FormGroup({
       itemName : new FormControl('',Validators.required),
       orderPrice : new FormControl(0,Validators.required), //force user to type value
@@ -28,6 +28,11 @@ export class InventoryComponent {
       expiryDate: new FormControl(0,Validators.required),
       quantity: new FormControl(0,Validators.required),
     })
+    //localStorage.setItem("products",[].toString())
+  }
+
+  ngOnInit(){
+    this.getAllIProducts();
   }
 
 standTypeValidator(control: FormControl) {
@@ -41,25 +46,18 @@ standTypeValidator(control: FormControl) {
 }
 
 saveProduct(){
-  let product = this.stockForm.value as Product;
-  for(let i = 0; i < this.products.length; i++){
-    if(this.products[i].itemName == product.itemName){
-      this.products[i] = product;
+  let prod = this.stockForm.value as Product;
+  const hasProduct = this.products.some(product => product.itemName == prod.itemName)
+  if (hasProduct) {
+      let i = this.products.findIndex(x => x.itemName == prod.itemName)
+      this.products[i] = prod;
       localStorage.setItem("products", JSON.stringify(this.products));
-      break;
-    }
-    else{
-      this.products.push(product);
-      localStorage.setItem("products", JSON.stringify(this.products));
-      break;
-    }
+  }
+  else{
+    this.products.push(prod);
+    localStorage.setItem("products", JSON.stringify(this.products))
   }
   
-
-  console.log(product);
-  
-  // let productCollection = collection(this.fs, 'products');
-  // return addDoc(productCollection, data);
 }
 
 getAllIProducts(){
@@ -81,8 +79,10 @@ saveEditedProduct(product: Product){
 
   localStorage.setItem("products", JSON.stringify(this.products));
 }
-deleteProduct(id: number){
-  // this.products.splice();
+deleteProduct(prod: Product){
+  let i = this.products.findIndex(x => x.itemName == prod.itemName)
+  this.products.splice(i,1);
+  localStorage.setItem("products", JSON.stringify(this.products));
 }
 
 
