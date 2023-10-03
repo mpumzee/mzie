@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../Shared/user';
 
 @Component({
   selector: 'login',
@@ -23,16 +24,28 @@ export class LoginComponent {
     });
   }
 
+  // ngOnInit(){
+  //   this.getAllIProducts();
+  // }
+
   onSubmit(){
     this.errorMessage = false;
     let username =  this.loginData.controls['username'].value;
     let password =  this.loginData.controls['password'].value;
     
-    if(username = "1" && password == "1"){
+    if(this.authenticate(username, password)){
       this.router.navigate(['menu/dashboard']);
     }
     else{
       this.errorMessage = true;
     }
+  }
+
+  authenticate(username: string, password:string){
+    let users : User[] = [];
+    users = JSON.parse(localStorage.getItem("users") || "");
+    if(users.length == 0) return true;
+    let hasUser = users.some(x => x.userName == username && x.password == x.password)
+    return hasUser == true;
   }
 }
