@@ -35,9 +35,7 @@ getAllProducts(){
   this.products = JSON.parse(x);
 }
 
-add(payment:Payment){
-  console.log(payment);
-  
+add(payment:Payment){  
   payment.quantity = payment.quantity + 1;
   payment.total = payment.sellingPrice * payment.quantity;
   this.total();
@@ -52,7 +50,6 @@ subtract(payment:Payment){
 total(){
   let x  = 0;
   for (const payment of this.payments) {
-    console.log(payment.total);    
     x = x + payment.total;
     this.totalCost = x;
   }
@@ -60,7 +57,6 @@ total(){
 
 calculateChange(){
   this.change = this.amountReceived - this.totalCost;
-  console.log(this.payments);
   for (let i = 0; i < this.payments.length; i++) {
     if(this.payments[i].name == this.products[i].itemName){
       let x = this.products[i].quantity;
@@ -68,7 +64,7 @@ calculateChange(){
       this.products[i].quantity = x;
     }
   }
-  // localStorage.setItem("")
+  localStorage.setItem("products", JSON.stringify(this.products));
   
 }
 
