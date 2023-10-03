@@ -11,6 +11,8 @@ import { Product } from '../Shared/product';
 export class PaymentComponent {
 payments: Payment[] = [];
 products: Product[] = [];
+productExpired = false;
+productOutofStock = false;
 
 totalCost = 0;
   change = 0;
@@ -25,6 +27,7 @@ constructor(){
     x.sellingPrice = product.sellingPrice;
     x.quantity = 0;
     x.total = 0;
+    x.inventoryLevel = product.quantity;
     x.transactionDate = Date.now().toString();
     this.payments.push(x);  
   });  
@@ -65,12 +68,15 @@ calculateChange(){
     }
   }
   localStorage.setItem("products", JSON.stringify(this.products));
+  this.getAllProducts();
   
 }
 
 onKeypressEvent(event:any){
   this.calculateChange();  
 }
+
+
 
 
 }

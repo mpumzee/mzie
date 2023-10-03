@@ -41,7 +41,7 @@
                         <td>{{ i + 1 }}</td>
                         <td>{{ payment["name"] }}</td>
                         <td>{{ payment["sellingPrice"] }}</td>
-                        <td class="w-50">
+                        <td class="w-50" *ngIf="payment.inventoryLevel > 0">
                           <button
                             (click)="subtract(payment)"
                             class="bs-stepper-circle bg-primary border-0"
@@ -78,6 +78,12 @@
                             +
                           </button>
                         </td>
+
+                        <!-- If product out of stock -->
+                        <td class="w-50 text-danger" *ngIf="payment.inventoryLevel == 0">
+                          Out of stock
+                        </td>
+                        <!-- if product out end -->
                         <td>
                           {{ payment["quantity"] * payment["sellingPrice"] }}
                         </td>
